@@ -1,8 +1,6 @@
-package main
+package helper
 
-import (
-	"fmt"
-)
+import "fmt"
 
 func gcd(a, b int) int {
 	if a == 0 {
@@ -39,7 +37,7 @@ func StringDecryption(cipher, d, n int) byte {
 	Decrypted_msg := power(cipher, d, n)
 	return byte(Decrypted_msg)
 }
-func main() {
+func RSA(msg string) string {
 	p, q := 9001, 13
 	n := p * q
 	phi := (p - 1) * (q - 1)
@@ -58,21 +56,25 @@ func main() {
 			break
 		}
 	}
-	m := 24
-	cipher := Encryption(m, e, n)
-	Decrypted_msg := Decryption(cipher, dd, n)
-	fmt.Println("the original msg is", m)
-	fmt.Println("the decrypted msg is ", Decrypted_msg)
-	msg := "hello world"
-	fmt.Println("The original message is ", msg)
+	// m := 24
+	// cipher := Encryption(m, e, n)
+	// Decrypted_msg := Decryption(cipher, dd, n)
+	// fmt.Println("the original msg is", m)
+	// fmt.Println("the decrypted msg is ", Decrypted_msg)
+	// // msg := "hello world"
+	// fmt.Println("The original message is ", msg)
 	data := []byte(msg)
 	var encrypted []int
 	for i := 0; i < len(data); i++ {
 		encrypted = append(encrypted, Encryption(int(data[i]), e, n))
 	}
+	// fmt.Println("The encrypted message is", s
 	var dycrypted []byte
 	for i := 0; i < len(encrypted); i++ {
 		dycrypted = append(dycrypted, StringDecryption(int(encrypted[i]), dd, n))
 	}
-	fmt.Println("the decrypted message is", string(dycrypted))
+	fmt.Println("the dycrypted message inn byte is", dycrypted)
+	ans := string(dycrypted)
+	// fmt.Println("the decrypted message is", string(dycrypted))
+	return ans
 }
